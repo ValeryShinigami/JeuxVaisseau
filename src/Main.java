@@ -82,7 +82,5 @@ public class Main extends BasicGame{
 		}
 
 	}
-
-
-
+	
 }
