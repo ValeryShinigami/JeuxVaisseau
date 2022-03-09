@@ -1,10 +1,15 @@
+
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
+
 
 public class Main extends BasicGame{
 
@@ -16,6 +21,15 @@ public class Main extends BasicGame{
 	float x = 200.0f;//f = float format
 	float y = 300.0f;
 	float speed = 0.2f;
+	
+	private Music music;
+	private Sound sound;
+
+
+
+
+
+
 
 	public Main(String title) {
 		super(title);
@@ -27,11 +41,13 @@ public class Main extends BasicGame{
 		//zone du jeu
 		AppGameContainer app = new AppGameContainer(new Main("Vaisseau Area"));
 		//taille de la zone
-		app.setDisplayMode(800, 532, false);//800 pixels large, 600 pixels hauteur false car non full screen
+		app.setDisplayMode(800, 532, false);//800 pixels large, (532 pixels hauteur false car non full screen
 		//on lance le jeu
 		app.start();
 
+
 	}
+
 
 	@Override
 	//gc et g le nom en parametre ca remplace les arg
@@ -42,13 +58,24 @@ public class Main extends BasicGame{
 
 
 
+
 	}
+
+
 
 	@Override
 	public void init(GameContainer arg0) throws SlickException {
 		// chargé la police, sound graphique, les images etc
-		back = new Image("espace.jpg");
+		back = new Image("galaxy.jpg");
 		robo = new Image("robo.png");
+
+		music = new Music("beat.wav");
+		music.loop();
+		music.setVolume(0.3f);
+		
+		sound = new Sound("canon.ogg");
+		
+
 	}
 
 	@Override
@@ -80,7 +107,16 @@ public class Main extends BasicGame{
 			y += speed * delta;
 
 		}
-
+		//presse bar espace pour le son du shoot laser
+		if(input.isKeyDown(Input.KEY_SPACE)) {
+			sound.play();
+		}
 	}
-	
+
+
+
 }
+
+
+
+
